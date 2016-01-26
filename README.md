@@ -38,6 +38,25 @@ $ TEMPLATE=templates/config.tmpl ./ecr-login
 }
 ```
 
+## Systemd example
+
+This is an example of how I use `ecr-login` with systemd units on
+CoreOS:
+
+```
+[Unit]
+Description=Example
+
+[Service]
+User=core
+Environment=AWS_REGION=us-east-1
+ExecStartPre=/bin/bash -c 'eval $(docker run -e AWS_REGION rlister/ecr-login)'
+ExecStartPre=-/usr/bin/docker rm example
+ExecStartPre=/usr/bin/docker pull 1234567890.dkr.ecr.us-east-1.amazonaws.com/example:latest
+ExecStart=/usr/bin/docker run --name example 1234567890.dkr.ecr.us-east-1.amazonaws.com/example:latest
+ExecStop=/usr/bin/docker stop example
+```
+
 ## Build from source
 
 ```
