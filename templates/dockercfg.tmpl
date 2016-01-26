@@ -1,0 +1,6 @@
+{ {{range $index, $a := .}}{{if $index}},{{end}}
+        "{{$a.ProxyEndpoint}}": {
+                "auth": "{{$a.Token}}",
+                "email": "none"
+        }{{end}}
+}
