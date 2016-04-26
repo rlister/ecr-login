@@ -3,12 +3,12 @@
 package ecr
 
 import (
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/client"
-	"github.com/aws/aws-sdk-go/aws/client/metadata"
-	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/private/protocol/jsonrpc"
-	"github.com/aws/aws-sdk-go/private/signer/v4"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/client"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/client/metadata"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/request"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/private/protocol/jsonrpc"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/private/signer/v4"
 )
 
 // Amazon EC2 Container Registry (Amazon ECR) is a managed AWS Docker registry

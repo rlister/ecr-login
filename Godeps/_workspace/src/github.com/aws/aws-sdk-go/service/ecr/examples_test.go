@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws"
 	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/session"
 	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/service/ecr"
 )

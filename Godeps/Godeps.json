@@ -1,14 +1,49 @@
 {
 	"ImportPath": "github.com/rlister/ecr-login",
-	"GoVersion": "go1.5.1",
+	"GoVersion": "go1.6.2",
 	"Deps": [
 		{
-			"ImportPath": "github.com/aws/aws-sdk-go/aws/session",
+			"ImportPath": "github.com/aws/aws-sdk-go/aws",
+			"Comment": "v1.0.11-1-g87b1e60",
+			"Rev": "87b1e60a50b09e4812dee560b33a238f67305804"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/private/endpoints",
+			"Comment": "v1.0.11-1-g87b1e60",
+			"Rev": "87b1e60a50b09e4812dee560b33a238f67305804"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/private/protocol/json/jsonutil",
+			"Comment": "v1.0.11-1-g87b1e60",
+			"Rev": "87b1e60a50b09e4812dee560b33a238f67305804"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/private/protocol/jsonrpc",
+			"Comment": "v1.0.11-1-g87b1e60",
+			"Rev": "87b1e60a50b09e4812dee560b33a238f67305804"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/private/protocol/rest",
+			"Comment": "v1.0.11-1-g87b1e60",
+			"Rev": "87b1e60a50b09e4812dee560b33a238f67305804"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/private/signer/v4",
 			"Comment": "v1.0.11-1-g87b1e60",
 			"Rev": "87b1e60a50b09e4812dee560b33a238f67305804"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/service/ecr",
+			"Comment": "v1.0.11-1-g87b1e60",
+			"Rev": "87b1e60a50b09e4812dee560b33a238f67305804"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/vendor/github.com/go-ini/ini",
+			"Comment": "v1.0.11-1-g87b1e60",
+			"Rev": "87b1e60a50b09e4812dee560b33a238f67305804"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/vendor/github.com/jmespath/go-jmespath",
 			"Comment": "v1.0.11-1-g87b1e60",
 			"Rev": "87b1e60a50b09e4812dee560b33a238f67305804"
 		}
