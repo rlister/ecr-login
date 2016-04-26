@@ -49,13 +49,32 @@ Description=Example
 
 [Service]
 User=core
-Environment=AWS_REGION=us-east-1
-ExecStartPre=/bin/bash -c 'eval $(docker run -e AWS_REGION rlister/ecr-login)'
+ExecStartPre=/bin/bash -c 'eval $(docker run rlister/ecr-login:latest)'
 ExecStartPre=-/usr/bin/docker rm example
 ExecStartPre=/usr/bin/docker pull 1234567890.dkr.ecr.us-east-1.amazonaws.com/example:latest
 ExecStart=/usr/bin/docker run --name example 1234567890.dkr.ecr.us-east-1.amazonaws.com/example:latest
 ExecStop=/usr/bin/docker stop example
 ```
+
+## AWS credentials
+
+`ecr-login` uses the usual AWS environment variables or credentials
+file. For example, you can set:
+
+```
+AWS_REGION=us-east-1
+AWS_ACCESS_KEY_ID=xxx
+AWS_SECRET_ACCESS_KEY=xxx
+```
+
+EC2 instance role permissions will be used if available. If `AWS_REGION`
+is not set on an ec2 instance, the local region will be inferred from
+instance metadata.
+
+You will need the correct IAM permissions to authenticate (and then
+actually pull images from your registry). The easiest method is to add
+the AWS managed policy
+[AmazonEC2ContainerRegistryReadOnly](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecr_managed_policies.html).
 
 ### Dependencies
 
