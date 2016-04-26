@@ -57,6 +57,22 @@ ExecStart=/usr/bin/docker run --name example 1234567890.dkr.ecr.us-east-1.amazon
 ExecStop=/usr/bin/docker stop example
 ```
 
+### Dependencies
+
+Dependencies are vendored using
+[godep](https://github.com/tools/godep). Install `godep` with:
+
+```
+go get github.com/tools/godep
+```
+
+then install or update any deps locally with:
+
+```
+go get -u github.com/foo/bar
+godep save -r
+```
+
 ## Build from source
 
 ```
