@@ -47,23 +47,28 @@ func getTemplate() *template.Template {
 	return tmpl
 }
 
-func main() {
-	var registryIds []*string
+// if AWS_REGION not set, infer from instance metadata
 
+// get list of registries from env, leave empty for default
+func getRegistryIds() []*string {
+	var registryIds []*string
 	registries, exists := os.LookupEnv("REGISTRIES")
 	if exists {
 		for _, registry := range strings.Split(registries, ",") {
 			registryIds = append(registryIds, aws.String(registry))
 		}
 	}
+	return registryIds
+}
 
 	svc := ecr.New(session.New())
 
-	// this would be how to get tokens for multiple registries
+	// this lets us handle multiple registries
 	params := &ecr.GetAuthorizationTokenInput{
-		RegistryIds: registryIds,
+		RegistryIds: getRegistryIds(),
 	}
 
+	// request the token
 	resp, err := svc.GetAuthorizationToken(params)
 	check(err)
 
