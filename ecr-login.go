@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/base64"
 	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/ec2metadata"
 	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/session"
 	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/service/ecr"
 	"os"
@@ -48,6 +49,15 @@ func getTemplate() *template.Template {
 }
 
 // if AWS_REGION not set, infer from instance metadata
+func getRegion(sess *session.Session) string {
+	region, exists := os.LookupEnv("AWS_REGION")
+	if !exists {
+		ec2region, err := ec2metadata.New(sess).Region()
+		check(err)
+		region = ec2region
+	}
+	return region
+}
 
 // get list of registries from env, leave empty for default
 func getRegistryIds() []*string {
@@ -61,7 +71,10 @@ func getRegistryIds() []*string {
 	return registryIds
 }
 
-	svc := ecr.New(session.New())
+func main() {
+	// configure aws client
+	sess := session.New()
+	svc := ecr.New(sess, aws.NewConfig().WithRegion(getRegion(sess)))
 
 	// this lets us handle multiple registries
 	params := &ecr.GetAuthorizationTokenInput{
