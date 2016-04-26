@@ -1,4 +1,14 @@
 {
+	"Tasks": [
+		"default",
+		"publish-github"
+	],
 	"PackageVersion": "0.1.0",
+	"TaskSettings": {
+		"publish-github": {
+			"owner": "rlister",
+			"repository": "ecr-login"
+		}
+	},
 	"ConfigVersion": "0.9"
 }
