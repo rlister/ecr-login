@@ -2,14 +2,16 @@ package main
 
 import (
 	"encoding/base64"
-	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws"
-	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/ec2metadata"
-	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/session"
-	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/service/ecr"
+	"fmt"
 	"os"
 	"strings"
 	"text/template"
 	"time"
+
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/ec2metadata"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/aws/session"
+	"github.com/rlister/ecr-login/Godeps/_workspace/src/github.com/aws/aws-sdk-go/service/ecr"
 )
 
 type Auth struct {
@@ -53,7 +55,10 @@ func getRegion(sess *session.Session) string {
 	region, exists := os.LookupEnv("AWS_REGION")
 	if !exists {
 		ec2region, err := ec2metadata.New(sess).Region()
-		check(err)
+		if err != nil {
+			fmt.Printf("AWS_REGION not set and unable to fetch region from instance metadata: %s\n", err.Error())
+			os.Exit(1)
+		}
 		region = ec2region
 	}
 	return region
@@ -83,7 +88,10 @@ func main() {
 
 	// request the token
 	resp, err := svc.GetAuthorizationToken(params)
-	check(err)
+	if err != nil {
+		fmt.Printf("Error authorizing: %s\n", err.Error())
+		os.Exit(1)
+	}
 
 	// fields to send to template
 	fields := make([]Auth, len(resp.AuthorizationData))
