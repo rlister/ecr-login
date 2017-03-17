@@ -79,7 +79,7 @@ func getRegistryIds() []*string {
 func main() {
 	// configure aws client
 	sess := session.New()
-	svc := ecr.New(sess, aws.NewConfig().WithRegion(getRegion(sess)))
+	svc := ecr.New(sess, aws.NewConfig().WithMaxRetries(10).WithRegion(getRegion(sess)))
 
 	// this lets us handle multiple registries
 	params := &ecr.GetAuthorizationTokenInput{
